@@ -1,0 +1,17 @@
+// backend/data/users.json — array with at least 2 users, one admin one employee
+[
+    {
+        "id": 1,
+        "username": "admin_user",
+        "email": "admin@example.com",
+        "role": "admin",
+        "isActive": true
+    },
+    {
+        "id": 2,
+        "username": "employee_user",
+        "email": "employee@example.com",
+        "role": "employee",
+        "isActive": true
+    }
+]
