@@ -1,4 +1,3 @@
-// backend/data/users.json — array with at least 2 users, one admin one employee
 [
     {
         "id": 1,
