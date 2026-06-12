@@ -1,0 +1,38 @@
+[
+    {
+        "id": 1,
+        "userId": 2,
+        "type": "Annual Leave",
+        "from": "2024-01-10",
+        "to": "2024-01-15",
+        "reason": "Family vacation",
+        "status": "approved"
+    },
+    {
+        "id": 2,
+        "userId": 2,
+        "type": "Sick Leave",
+        "from": "2024-02-05",
+        "to": "2024-02-06",
+        "reason": "Fever and cold",
+        "status": "rejected"
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "type": "Emergency Leave",
+        "from": "2024-03-01",
+        "to": "2024-03-02",
+        "reason": "Family emergency",
+        "status": "pending"
+    },
+    {
+        "id": 4,
+        "userId": 2,
+        "type": "Annual Leave",
+        "from": "2024-04-10",
+        "to": "2024-04-12",
+        "reason": "Personal work",
+        "status": "approved"
+    }
+]
