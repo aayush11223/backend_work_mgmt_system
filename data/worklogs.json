@@ -1,7 +1,6 @@
 [
     {
         "id": 1,
-        "userId": 2,
         "date": "2026-05-20",
         "description": "Created employee dashboard UI",
         "units": 2,
@@ -9,7 +8,6 @@
     },
     {
         "id": 2,
-        "userId": 2,
         "date": "2026-05-21",
         "description": "Integrated attendance API",
         "units": 1,
@@ -17,7 +15,6 @@
     },
     {
         "id": 3,
-        "userId": 2,
         "date": "2026-05-22",
         "description": "Fixed login validation bugs",
         "units": 3,
@@ -25,7 +22,6 @@
     },
     {
         "id": 4,
-        "userId": 2,
         "date": "2026-05-23",
         "description": "Worked on leave management module",
         "units": 2,
