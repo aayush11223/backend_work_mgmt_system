@@ -30,5 +30,13 @@
         "description": "Worked on leave management module",
         "units": 2,
         "hours": 7
+    },
+    {
+        "id": 5,
+        "userId": 5,
+        "date": "2026-05-25",
+        "description": "Worked on weekend",
+        "units": 2,
+        "hours": 7
     }
 ]
