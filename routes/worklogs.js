@@ -1,9 +1,12 @@
+// GET /worklogs — returns all worklogs
+// POST /worklogs — adds a new worklog
+
 const express = require('express');
 const fs = require('fs').promises;
 const path = require('path');
 
 const router = express.Router();
-const filePath = path.join(__dirname, '../data/attendance.json');
+const filePath = path.join(__dirname, '../data/worklogs.json');
 
 router.get('/', (req, res) => {
     fs.readFile(filePath, 'utf8')
@@ -27,7 +30,7 @@ router.post('/', (req, res) => {
             records.push(newRecord);
 
             return fs.writeFile(filePath, JSON.stringify(records))
-                //it permanently writes the POST data of a user in attendance.json
+                //it permanently writes the POST data of a user in worklogs.json
                 .then(() => res.status(201).json(newRecord));
         })
         .catch((err) => {
@@ -35,5 +38,7 @@ router.post('/', (req, res) => {
             res.status(500).json({ error: 'Internal server error' });
         });
 });
+
+
 
 module.exports = router;
