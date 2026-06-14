@@ -34,12 +34,5 @@
         "to": "2024-04-12",
         "reason": "Personal work",
         "status": "approved"
-    },
-    {
-        "id": 5,
-        "date": "2026-05-20",
-        "description": "Check check check",
-        "units": "2",
-        "hours": "5"
     }
 ]
