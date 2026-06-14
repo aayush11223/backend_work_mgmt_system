@@ -2,41 +2,41 @@
     {
         "id": 1,
         "userId": 2,
-        "date": "2026-05-20",
-        "description": "Created employee dashboard UI",
-        "units": 2,
-        "hours": 5
+        "date": "May 20, 2026",
+        "CheckIn": "09:05:15",
+        "CheckOut": "06:08:50",
+        "Status": "Late In - Late Out"
     },
     {
         "id": 2,
         "userId": 2,
-        "date": "2026-05-21",
-        "description": "Integrated attendance API",
-        "units": 1,
-        "hours": 4
+        "date": "May 21, 2026",
+        "CheckIn": "08:58:15",
+        "CheckOut": "06:08:50",
+        "Status": "Early In - Late Out"
     },
     {
         "id": 3,
         "userId": 2,
-        "date": "2026-05-22",
-        "description": "Fixed login validation bugs",
-        "units": 3,
-        "hours": 6
+        "date": "May 22, 2026",
+        "CheckIn": "09:05:15",
+        "CheckOut": "06:08:50",
+        "Status": "Late In - Late Out"
     },
     {
         "id": 4,
         "userId": 2,
-        "date": "2026-05-23",
-        "description": "Worked on leave management module",
-        "units": 2,
-        "hours": 7
+        "date": "May 23, 2026",
+        "CheckIn": "09:05:15",
+        "CheckOut": "05:59:50",
+        "Status": "Early In - Early Out"
     },
     {
         "id": 5,
-        "userId": 5,
-        "date": "2026-05-25",
-        "description": "Worked on weekend",
-        "units": 2,
-        "hours": 7
+        "userId": 2,
+        "date": "May 24, 2026",
+        "CheckIn": "09:05:15",
+        "CheckOut": "06:08:50",
+        "Status": "Late In - Late Out"
     }
 ]
