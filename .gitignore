@@ -6,3 +6,7 @@ node_modules/
 
 # Keep secret API keys private
 .env
+
+/generated/prisma
+
+/generated/prisma
