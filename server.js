@@ -11,6 +11,7 @@ const employeesRouter = require('./routes/employees.js');
 
 const app = express();
 const port = process.env.PORT;
+const pool = require('./db');
 
 app.use(cors());
 app.use(express.json());
@@ -27,6 +28,52 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+//for db connection
+app.get('/db-test', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT NOW()');
+        res.json({
+            success: true,
+            time: result.rows[0].now
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            success: false,
+            error: err.message
+        });
+    }
+});
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
+
+
+
+
+
+// const express = require('express');
+// const pool = require('./db');
+
+// const app = express();
+
+// app.get('/db-test', async (req, res) => {
+//     try {
+//         const result = await pool.query('SELECT NOW()');
+//         res.json({
+//             success: true,
+//             time: result.rows[0].now
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({
+//             success: false,
+//             error: err.message
+//         });
+//     }
+// });
+
+// app.listen(3000, () => {
+//     console.log('Server running on port 3000');
+// });
