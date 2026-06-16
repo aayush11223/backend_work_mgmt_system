@@ -1,37 +1,39 @@
 const express = require('express');
-const fs = require('fs').promises;
-const path = require('path');
-
+const prisma = require('../db');
 const router = express.Router();
-const filePath = path.join(__dirname, '../data/attendance.json');
 
+// GET /attendance - find all attendance records for the logged-in user
 router.get('/', (req, res) => {
-    fs.readFile(filePath, 'utf8')
-        .then((data) => res.status(200).json(JSON.parse(data)))
+    prisma.attendance.findMany({
+        where: {
+            userId: parseInt(req.query.userId)
+        }
+    })
+        .then((records) => {
+            res.status(200).json(records);
+        })
         .catch((err) => {
-            console.error('Error reading attendance file:', err);
+            console.error('Error fetching attendance records:', err);
             res.status(500).json({ error: 'Internal server error' });
         });
 });
 
+// POST /attendance - create a new attendance record
 router.post('/', (req, res) => {
-    fs.readFile(filePath, 'utf8')
-        .then((data) => {
-            const records = JSON.parse(data);
-
-            const newRecord = {
-                id: records.length + 1,
-                ...req.body, //adds up the value POST by user
-            };
-
-            records.push(newRecord);
-
-            return fs.writeFile(filePath, JSON.stringify(records))
-                //it permanently writes the POST data of a user in attendance.json
-                .then(() => res.status(201).json(newRecord));
+    prisma.attendance.create({
+        data: {
+            userId: parseInt(req.body.userId),
+            date: req.body.date,
+            checkIn: req.body.checkIn,
+            checkOut: req.body.checkOut,
+            status: req.body.status
+        }
+    })
+        .then((record) => {
+            res.status(201).json(record);
         })
         .catch((err) => {
-            console.error('Error updating attendance file:', err);
+            console.error('Error creating attendance record:', err);
             res.status(500).json({ error: 'Internal server error' });
         });
 });
