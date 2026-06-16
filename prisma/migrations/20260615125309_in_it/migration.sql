@@ -29,8 +29,8 @@ CREATE TABLE "Leave" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "type" TEXT NOT NULL,
-    "fromDate" TIMESTAMP(3) NOT NULL,
-    "toDate" TIMESTAMP(3) NOT NULL,
+    "fromDate" TEXT NOT NULL,
+    "toDate" TEXT NOT NULL,
     "reason" TEXT,
     "status" TEXT NOT NULL DEFAULT 'pending',
 
@@ -41,7 +41,7 @@ CREATE TABLE "Leave" (
 CREATE TABLE "WorkLog" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
+    "date" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "units" INTEGER NOT NULL,
     "hours" DOUBLE PRECISION NOT NULL,

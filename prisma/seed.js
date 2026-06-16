@@ -269,8 +269,8 @@ async function main() {
         data: {
             userId: emp1User.id,
             type: "sick",
-            fromDate: new Date("2026-06-10"),
-            toDate: new Date("2026-06-12"),
+            fromDate: "2026-06-10",
+            toDate: "2026-06-12",
             reason: "Fever",
             status: "pending",
         },
@@ -281,21 +281,21 @@ async function main() {
         data: [
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-01"),
+                date: "2026-06-01",
                 description: "Backend API development",
                 units: 3,
                 hours: 5.5,
             },
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-02"),
+                date: "2026-06-02",
                 description: "Bug fixing and testing",
                 units: 2,
                 hours: 2,
             },
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-03"),
+                date: "2026-06-03",
                 description: "Code review and documentation",
                 units: 2,
                 hours: 3,

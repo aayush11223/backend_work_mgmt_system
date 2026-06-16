@@ -54,8 +54,8 @@ id Int @id @default(autoincrement())
 userId Int
 user User @relation(fields: [userId], references: [id])
 type String
-fromDate DateTime
-toDate DateTime
+fromDate String
+toDate String
 reason String?
 status String @default("pending")
 }
@@ -64,7 +64,7 @@ model WorkLog {
 id Int @id @default(autoincrement())
 userId Int
 user User @relation(fields: [userId], references: [id])
-date DateTime
+date String
 description String
 units Int
 hours Float

@@ -38,4 +38,22 @@ router.post('/', (req, res) => {
         });
 });
 
+//GET all leaves for admin
+router.get('/all', (req, res) => {
+    prisma.attendance.findMany({
+        include: {
+            user: {
+                select: { name: true }
+            }
+        }
+    })
+        .then((records) => {
+            res.status(200).json(records);
+        })
+        .catch((err) => {
+            console.error('Error fetching all attendance:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+});
+
 module.exports = router;
