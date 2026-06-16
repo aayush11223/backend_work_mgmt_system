@@ -1,47 +1,63 @@
-
 const express = require('express');
-
-
-const fs = require('fs').promises;
-
-const path = require('path'); //used for cross OS path, joininig paths, coverting realtive path to absolute path
-
 const router = express.Router();
+const prisma = require('../db');
 
-const usersFilePath = path.join(__dirname, '../data/users.json');
-//__dirname is a Node.js built-in variable that gives the absolute path of the current file's
-
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
         return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    fs.readFile(usersFilePath, 'utf8') //reads the users.json and utf8 is required to convert raw data into readable format
-        .then((data) => {
-            const users = JSON.parse(data);
-            const user = users.find(u => u.email === email && u.password === password);
-
-            if (!user) {
-                return res.status(401).json({ error: 'Invalid email or password' });
-            }
-
-            // Create a copy to avoid sending sensitive password data back
-            const userResponse = { ...user };
-            delete userResponse.password;
-
-            const fakeToken = `fake-jwt-token-for-${userResponse.email}-${Date.now()}`;
-
-            res.status(200).json({
-                user: userResponse,
-                token: fakeToken
-            });
-        })
-        .catch((err) => {
-            console.error('Error reading users file:', err);
-            res.status(500).json({ error: 'Internal server error' });
+    try {
+        const user = await prisma.user.findUnique({
+            where: { email }
         });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        if (user.password !== password) {
+            return res.status(401).json({ error: 'Invalid password' });
+        }
+
+        const { password: _, ...userResponse } = user;
+        const token = `token-${user.id}`;
+
+        res.status(200).json({ user: userResponse, token });
+
+    } catch (err) {
+        console.error('Login error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+router.get('/me', async (req, res) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        return res.status(401).json({ error: 'No token provided' });
+    }
+
+    try {
+        const userId = parseInt(token.split('-')[1]);
+
+        const user = await prisma.user.findUnique({
+            where: { id: userId }
+        });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const { password: _, ...userResponse } = user;
+        res.status(200).json(userResponse);
+
+    } catch (err) {
+        console.error('Auth me error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 module.exports = router;

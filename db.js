@@ -1,14 +1,12 @@
+const { PrismaClient } = require("@prisma/client");
+const { PrismaPg } = require("@prisma/adapter-pg");
+require("dotenv").config();
 
-const { PrismaClient } = require('@prisma/client')
-require('dotenv').config();
+// Initialize using the PrismaPg adapter instead of datasources object
+const prisma = new PrismaClient({
+    adapter: new PrismaPg({
+        connectionString: process.env.DATABASE_URL
+    }),
+});
 
-const prisma = new PrismaClient()
-    ({
-        user: process.env.DB_USER,
-        host: process.env.DB_HOST,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASSWORD,
-        port: parseInt(process.env.DB_PORT, 10),
-    });
-
-module.exports = prisma
+module.exports = prisma;

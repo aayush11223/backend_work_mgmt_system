@@ -34,14 +34,14 @@ async function main() {
     const emp1User = await prisma.user.upsert({
         where: { username: "aayush" },
         update: {
-            name: "Aayush Sharma",
+            name: "Aayush",
             email: "aayush@gmail.com",
             password: "employee123",
             role: "employee",
             department: "IT",
         },
         create: {
-            name: "Aayush Sharma",
+            name: "Aayush",
             username: "aayush",
             email: "aayush@gmail.com",
             password: "employee123",
@@ -303,7 +303,7 @@ async function main() {
         ],
     });
 
-    console.log("✅ Seeding completed!");
+    console.log("Seeding completed!");
 }
 
 main()
