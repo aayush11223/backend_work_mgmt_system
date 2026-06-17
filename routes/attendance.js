@@ -56,4 +56,22 @@ router.get('/all', (req, res) => {
         });
 });
 
+router.patch('/:id', (req, res) => {
+    prisma.attendance.update({
+        where: { id: parseInt(req.params.id) },
+        data: {
+            checkIn: req.body.checkIn,
+            checkOut: req.body.checkOut,
+            status: req.body.status,
+        },
+    })
+        .then((record) => {
+            res.status(200).json(record);
+        })
+        .catch((err) => {
+            console.error('Error updating attendance record:', err); res.status(500)
+                .json({ error: 'Internal server error' });
+        });
+});
+
 module.exports = router;
