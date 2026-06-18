@@ -1,15 +1,32 @@
 const express = require('express');
-const fs = require('fs').promises;
-const path = require('path');
-
+const prisma = require('../db');
 const router = express.Router();
-const filePath = path.join(__dirname, '../data/employees.json');
 
+// GET /employees - find all employees
 router.get('/', (req, res) => {
-    fs.readFile(filePath, 'utf8')
-        .then((data) => res.status(200).json(JSON.parse(data)))
+    prisma.employee.findMany()
+        .then((employees) => {
+            res.status(200).json(employees);
+        })
         .catch((err) => {
-            console.error('Error reading employees file:', err);
+            console.error('Error fetching employees:', err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+});
+
+// GET /employees/:id - find a single employee
+router.get('/:id', (req, res) => {
+    prisma.employee.findUnique({
+        where: { id: parseInt(req.params.id) },
+    })
+        .then((employee) => {
+            if (!employee) {
+                return res.status(404).json({ error: 'Employee not found' });
+            }
+            res.status(200).json(employee);
+        })
+        .catch((err) => {
+            console.error('Error fetching employee:', err);
             res.status(500).json({ error: 'Internal server error' });
         });
 });

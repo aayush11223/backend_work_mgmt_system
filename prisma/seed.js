@@ -1,6 +1,7 @@
 require("dotenv/config");
 const { PrismaClient } = require("@prisma/client");
 const { PrismaPg } = require("@prisma/adapter-pg");
+const bcrypt = require("bcrypt");
 const prisma = new PrismaClient({
     adapter: new PrismaPg({
         connectionString: process.env.DATABASE_URL,
@@ -10,13 +11,17 @@ const prisma = new PrismaClient({
 async function main() {
     console.log(" Seeding database");
 
+    const saltRounds = 10;
+    const adminHashedPassword = await bcrypt.hash("admin123", saltRounds);
+    const employeeHashedPassword = await bcrypt.hash("employee123", saltRounds);
+
     // 1. Create or update Admin
     const admin = await prisma.user.upsert({
         where: { username: "admin" },
         update: {
             name: "Admin User",
             email: "admin@gmail.com",
-            password: "admin123",
+            password: adminHashedPassword,
             role: "admin",
             department: "Management",
         },
@@ -24,7 +29,7 @@ async function main() {
             name: "Admin User",
             username: "admin",
             email: "admin@gmail.com",
-            password: "admin123",
+            password: adminHashedPassword,
             role: "admin",
             department: "Management",
         },
@@ -36,7 +41,7 @@ async function main() {
         update: {
             name: "Aayush",
             email: "aayush@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "IT",
         },
@@ -44,7 +49,7 @@ async function main() {
             name: "Aayush",
             username: "aayush",
             email: "aayush@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "IT",
         },
@@ -55,7 +60,7 @@ async function main() {
         update: {
             name: "Bikash Thapa",
             email: "bikash@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "HR",
         },
@@ -63,7 +68,7 @@ async function main() {
             name: "Bikash Thapa",
             username: "bikash",
             email: "bikash@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "HR",
         },
@@ -74,7 +79,7 @@ async function main() {
         update: {
             name: "Sita Rai",
             email: "sita@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "Finance",
         },
@@ -82,7 +87,7 @@ async function main() {
             name: "Sita Rai",
             username: "sita",
             email: "sita@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "Finance",
         },
@@ -93,7 +98,7 @@ async function main() {
         update: {
             name: "Ramesh Adhikari",
             email: "ramesh@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "IT",
         },
@@ -101,7 +106,7 @@ async function main() {
             name: "Ramesh Adhikari",
             username: "ramesh",
             email: "ramesh@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "IT",
         },
@@ -112,7 +117,7 @@ async function main() {
         update: {
             name: "Priya Gurung",
             email: "priya@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "Marketing",
         },
@@ -120,7 +125,7 @@ async function main() {
             name: "Priya Gurung",
             username: "priya",
             email: "priya@gmail.com",
-            password: "employee123",
+            password: employeeHashedPassword,
             role: "employee",
             department: "Marketing",
         },
@@ -269,8 +274,8 @@ async function main() {
         data: {
             userId: emp1User.id,
             type: "sick",
-            fromDate: new Date("2026-06-10"),
-            toDate: new Date("2026-06-12"),
+            fromDate: "2026-06-10",
+            toDate: "2026-06-12",
             reason: "Fever",
             status: "pending",
         },
@@ -281,21 +286,21 @@ async function main() {
         data: [
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-01"),
+                date: "2026-06-01",
                 description: "Backend API development",
                 units: 3,
                 hours: 5.5,
             },
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-02"),
+                date: "2026-06-02",
                 description: "Bug fixing and testing",
                 units: 2,
                 hours: 2,
             },
             {
                 userId: emp1User.id,
-                date: new Date("2026-06-03"),
+                date: "2026-06-03",
                 description: "Code review and documentation",
                 units: 2,
                 hours: 3,
