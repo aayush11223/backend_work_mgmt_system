@@ -1,7 +1,7 @@
-const prisma = require('../db');
+import prisma from '../db.js';
 
 // GET /attendance - find all attendance records for the logged-in user
-exports.getUserAttendance = (req, res) => {
+export const getUserAttendance = (req, res) => {
     prisma.attendance.findMany({
         where: { userId: parseInt(req.query.userId) }
     })
@@ -15,7 +15,7 @@ exports.getUserAttendance = (req, res) => {
 };
 
 // POST /attendance - create a new attendance record
-exports.createAttendance = (req, res) => {
+export const createAttendance = (req, res) => {
     prisma.attendance.create({
         data: {
             userId: parseInt(req.body.userId),
@@ -35,7 +35,7 @@ exports.createAttendance = (req, res) => {
 };
 
 // GET /attendance/all - GET all leaves for admin
-exports.getAllAttendance = (req, res) => {
+export const getAllAttendance = (req, res) => {
     prisma.attendance.findMany({
         include: { user: { select: { name: true } } }
     })
@@ -49,7 +49,7 @@ exports.getAllAttendance = (req, res) => {
 };
 
 // PATCH /attendance/:id - update an attendance record
-exports.updateAttendance = (req, res) => {
+export const updateAttendance = (req, res) => {
     prisma.attendance.update({
         where: { id: parseInt(req.params.id) },
         data: {

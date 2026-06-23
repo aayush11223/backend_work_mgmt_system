@@ -1,7 +1,7 @@
-const prisma = require('../db');
+import prisma from '../db.js';
 
 // GET /worklogs - find all worklogs for the logged-in user
-exports.fetchWorklogs = (req, res) => {
+export const fetchWorklogs = (req, res) => {
     prisma.workLog.findMany({
         where: { userId: parseInt(req.query.userId) }
     })
@@ -15,7 +15,7 @@ exports.fetchWorklogs = (req, res) => {
 };
 
 // POST /worklogs - create a new worklog
-exports.logWork = (req, res) => {
+export const logWork = (req, res) => {
     prisma.workLog.create({
         data: {
             userId: parseInt(req.body.userId),
@@ -35,7 +35,7 @@ exports.logWork = (req, res) => {
 };
 
 // GET /worklogs/all - get all worklogs for admin
-exports.fetchAllLogs = (req, res) => {
+export const fetchAllLogs = (req, res) => {
     prisma.workLog.findMany({
         include: { user: { select: { name: true } } }
     })

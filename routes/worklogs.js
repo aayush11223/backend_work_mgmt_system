@@ -1,14 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const worklogsController = require('../controller/worklogsController.js');
+import express from 'express';
+import { fetchWorklogs, logWork, fetchAllLogs } from '../controller/worklogsController.js';
 
+const router = express.Router();
 // Fetch user worklogs
-router.get('/', worklogsController.fetchWorklogs);
+router.get('/', fetchWorklogs);
 
 // Create new worklog
-router.post('/', worklogsController.logWork);
+router.post('/', logWork);
 
 // Fetch all worklogs (Admin view)
-router.get('/all', worklogsController.fetchAllLogs);
+router.get('/all', fetchAllLogs);
 
-module.exports = router;
+export default router

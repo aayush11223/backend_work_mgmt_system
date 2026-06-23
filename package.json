@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -24,6 +24,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "gitignore": "^0.7.0",
+    "morgan": "^1.11.0",
     "pg": "^8.21.0",
     "prisma": "^7.8.0",
     "router": "^2.2.0"

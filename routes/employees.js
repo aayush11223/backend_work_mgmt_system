@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const employeeController = require('../controller/employeeController.js');
+import express from 'express'
+import { fetchEmployees, getEmployeeById } from '../controller/employeeController.js'
 
+const router = express.Router();
 // GET /employees
-router.get('/', employeeController.fetchEmployees);
+router.get('/', fetchEmployees);
 
 // GET /employees/:id
-router.get('/:id', employeeController.getEmployeeById);
+router.get('/:id', getEmployeeById);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const prisma = require('../db');
+import prisma from '../db.js';
 
 // Fetch all employees
-exports.fetchEmployees = (req, res) => {
+export const fetchEmployees = (req, res) => {
     prisma.employee.findMany()
         .then((employees) => {
             res.status(200).json(employees);
@@ -13,7 +13,7 @@ exports.fetchEmployees = (req, res) => {
 };
 
 // Fetch a single employee by ID
-exports.getEmployeeById = (req, res) => {
+export const getEmployeeById = (req, res) => {
     prisma.employee.findUnique({
         where: { id: parseInt(req.params.id) },
     })

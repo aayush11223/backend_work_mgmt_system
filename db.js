@@ -1,6 +1,7 @@
-const { PrismaClient } = require("@prisma/client");
-const { PrismaPg } = require("@prisma/adapter-pg");
-require("dotenv").config();
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+// require("dotenv").config();
+import "dotenv/config"
 
 // Initialize using the PrismaPg adapter instead of datasources object
 const prisma = new PrismaClient({
@@ -9,4 +10,4 @@ const prisma = new PrismaClient({
     }),
 });
 
-module.exports = prisma;
+export default prisma;

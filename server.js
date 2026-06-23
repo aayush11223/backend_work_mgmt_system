@@ -1,26 +1,33 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
+import express from "express"
+import cors from 'cors';
+import "dotenv/config"
+import morgan from "morgan";
 
-const authRouter = require('./routes/auth.js');
-const attendanceRouter = require('./routes/attendance.js');
-const leavesRouter = require('./routes/leaves.js');
-const worklogsRouter = require('./routes/worklogs.js');
-const employeesRouter = require('./routes/employees.js');
-const authMiddleware = require('./middleware/auth');
+import authRouter from './routes/auth.js';
+import attendanceRouter from './routes/attendance.js';
+import leavesRouter from './routes/leaves.js';
+import worklogsRouter from './routes/worklogs.js';
+import employeesRouter from './routes/employees.js';
+import authMiddleware from './middleware/auth.js';
 
 
 const app = express();
 const port = process.env.PORT;
-
 app.use(cors());
 app.use(express.json());
+app.use(morgan("tiny"));
+
+app.get("/", (req, res) => {
+    res.json({
+        ji: "asd"
+    })
+})
 
 app.use('/auth', authRouter);
 app.use('/attendance', authMiddleware, attendanceRouter);
 app.use('/leaves', authMiddleware, leavesRouter);
 app.use('/employees', authMiddleware, employeesRouter);
-app.use('/worklogs', worklogsRouter);
+app.use('/worklogs', authMiddleware, worklogsRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

@@ -1,17 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const leaveController = require('../controller/leaveController.js');
+import express from 'express';
+import { fetchAllLeaves, fetchLeaves, applyLeave, updateLeaveStatus } from '../controller/leaveController.js';
 
+const router = express.Router();
 // GET /leaves/all
-router.get('/all', leaveController.fetchAllLeaves);
+router.get('/all', fetchAllLeaves);
 
 // GET /leaves
-router.get('/', leaveController.fetchLeaves);
+router.get('/', fetchLeaves);
 
 // POST /leaves
-router.post('/', leaveController.applyLeave);
+router.post('/', applyLeave);
 
 // PATCH /leaves/:id
-router.patch('/:id', leaveController.updateLeaveStatus);
+router.patch('/:id', updateLeaveStatus);
 
-module.exports = router;
+export default router;

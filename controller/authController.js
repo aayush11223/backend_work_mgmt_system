@@ -1,8 +1,10 @@
-const prisma = require('../db');
-const bcrypt = require('bcrypt');
+import prisma from '../db.js';
+import bcrypt from 'bcrypt';
 
-const login = (req, res) => {
+export const login = (req, res) => {
+    // console.log("this is here")
     const { email, password } = req.body;
+    console.log(email)
 
     if (!email || !password) {
         return res.status(400).json({ error: 'Email and password are required' });
@@ -31,9 +33,8 @@ const login = (req, res) => {
         });
 };
 
-const initAuth = (req, res) => {
-    const token = req.headers.authorization;
-
+export const initAuth = (req, res) => {
+    const token = req.headers?.authorization;
     if (!token) {
         return res.status(401).json({ error: 'No token provided' });
     }
@@ -55,7 +56,4 @@ const initAuth = (req, res) => {
         });
 };
 
-module.exports = {
-    login,
-    initAuth,
-};
+

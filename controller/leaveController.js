@@ -1,7 +1,7 @@
-const prisma = require('../db');
+import prisma from '../db.js';
 
 // Fetch all leaves
-exports.fetchAllLeaves = (req, res) => {
+export const fetchAllLeaves = (req, res) => {
     prisma.leave.findMany()
         .then((leaves) => {
             res.status(200).json(leaves);
@@ -13,7 +13,7 @@ exports.fetchAllLeaves = (req, res) => {
 };
 
 // Fetch leaves for a specific user
-exports.fetchLeaves = (req, res) => {
+export const fetchLeaves = (req, res) => {
     prisma.leave.findMany({
         where: { userId: parseInt(req.query.userId) },
     })
@@ -27,7 +27,7 @@ exports.fetchLeaves = (req, res) => {
 };
 
 // Create a new leave request
-exports.applyLeave = (req, res) => {
+export const applyLeave = (req, res) => {
     prisma.leave.create({
         data: {
             userId: parseInt(req.body.userId),
@@ -48,7 +48,7 @@ exports.applyLeave = (req, res) => {
 };
 
 // Update leave status by ID
-exports.updateLeaveStatus = (req, res) => {
+export const updateLeaveStatus = (req, res) => {
     prisma.leave.update({
         where: { id: parseInt(req.params.id) },
         data: { status: req.body.status },

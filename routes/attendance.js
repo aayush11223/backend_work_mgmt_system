@@ -1,17 +1,17 @@
-const express = require('express');
+import express from 'express'
 const router = express.Router();
-const attendanceController = require('../controller/attendanceController.js');
+import { getUserAttendance, createAttendance, getAllAttendance, updateAttendance } from '../controller/attendanceController.js'
 
 // Fetch user attendance
-router.get('/', attendanceController.getUserAttendance);
+router.get('/', getUserAttendance);
 
 // Create new attendance
-router.post('/', attendanceController.createAttendance);
+router.post('/', createAttendance);
 
 // Fetch all attendance records (Admin view)
-router.get('/all', attendanceController.getAllAttendance);
+router.get('/all', getAllAttendance);
 
 // Update a single attendance record by ID
-router.patch('/:id', attendanceController.updateAttendance);
+router.patch('/:id', updateAttendance);
 
-module.exports = router;
+export default router;
