@@ -19,7 +19,7 @@ exports.logWork = (req, res) => {
     prisma.workLog.create({
         data: {
             userId: parseInt(req.body.userId),
-            date: new Date(req.body.date),
+            date: req.body.date,
             description: req.body.description,
             units: parseInt(req.body.units),
             hours: parseFloat(req.body.hours)

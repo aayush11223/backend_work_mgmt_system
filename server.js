@@ -7,6 +7,7 @@ const attendanceRouter = require('./routes/attendance.js');
 const leavesRouter = require('./routes/leaves.js');
 const worklogsRouter = require('./routes/worklogs.js');
 const employeesRouter = require('./routes/employees.js');
+const authMiddleware = require('./middleware/auth');
 
 
 const app = express();
@@ -16,10 +17,10 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/auth', authRouter);
-app.use('/attendance', attendanceRouter);
-app.use('/leaves', leavesRouter);
+app.use('/attendance', authMiddleware, attendanceRouter);
+app.use('/leaves', authMiddleware, leavesRouter);
+app.use('/employees', authMiddleware, employeesRouter);
 app.use('/worklogs', worklogsRouter);
-app.use('/employees', employeesRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
