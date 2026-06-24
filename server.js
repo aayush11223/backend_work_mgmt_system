@@ -9,6 +9,7 @@ import leavesRouter from './routes/leaves.js';
 import worklogsRouter from './routes/worklogs.js';
 import employeesRouter from './routes/employees.js';
 import authMiddleware from './middleware/auth.js';
+import paycheckRouter from './routes/paycheck.js';
 
 
 const app = express();
@@ -28,6 +29,7 @@ app.use('/attendance', authMiddleware, attendanceRouter);
 app.use('/leaves', authMiddleware, leavesRouter);
 app.use('/employees', authMiddleware, employeesRouter);
 app.use('/worklogs', authMiddleware, worklogsRouter);
+app.use('/paycheck', authMiddleware, paycheckRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
