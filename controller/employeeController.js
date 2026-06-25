@@ -28,3 +28,20 @@ export const getEmployeeById = (req, res) => {
             res.status(500).json({ error: 'Internal server error' });
         });
 };
+
+//update salary
+export function updateSalary(req, res) {
+    const id = parseInt(req.params.id);
+    const salary = parseInt(req.body.salary);
+
+    prisma.employee
+        .update({
+            where: { id },
+            data: { salary },
+        })
+        .then((employee) => {
+            res.status(200).json(employee);
+        });
+}
+
+
